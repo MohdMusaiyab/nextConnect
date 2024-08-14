@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Header = () => {
+const page = async() => {
   return (
     <div>
-      Header
+      Profile Here
     </div>
   )
 }
 
-export default Header
+export default page
