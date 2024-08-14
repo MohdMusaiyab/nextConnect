@@ -1,9 +1,12 @@
-import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
+export default async function Home() {
 
-export default function Home() {
+
   return (
-<div>
-  <Button variant={"destructive"}>ShadCN Button</Button>
-</div>
+    <div className="text-green-800">
+      sasas
+      <Header></Header>
+      
+    </div>
   );
 }
