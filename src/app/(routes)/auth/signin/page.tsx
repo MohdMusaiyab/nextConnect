@@ -1,12 +1,16 @@
 "use client";
 import { signIn } from "next-auth/react";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   // State variables for form inputs and error message
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  //For navigation
+  const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +29,7 @@ const LoginPage = () => {
       setError(res.error); // Set error message if login fails
     } else if (res?.ok) {
       // Redirect to dashboard on successful login
-      window.location.href = "http://localhost:3000/dashboard";
+      router.push("/dashboard");
     }
   };
 

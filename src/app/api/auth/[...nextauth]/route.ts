@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt,{compare} from "bcryptjs";
+import {compare} from "bcryptjs";
 
 const handler = NextAuth({
   providers: [
@@ -19,7 +19,7 @@ const handler = NextAuth({
         //Find the user in the database
         const user = await prisma.user.findUnique({ where: { email } });
         //If the user is not found, return an error message
-        
+        console.log("User: ", user);
         if (!user) {
           return null;
         }

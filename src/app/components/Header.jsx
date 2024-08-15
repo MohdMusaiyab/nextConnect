@@ -14,20 +14,22 @@ const Header = () => {
             alt="Company Logo"
             width={50}
             height={50}
-            className="rounded-full"
+            className="rounded-full object-cover"
           />
-          <h1 className="text-xl md:text-2xl font-bold  ml-2 md:ml-4">
+          <h1 className="text-xl md:text-2xl font-bold ml-2 md:ml-4 text-gray-800">
             Your Company
           </h1>
         </div>
 
         {/* Navigation Bar */}
-        <div className="mb-4 md:mb-0">
+        <nav className="mb-4 md:mb-0">
           <NavBar />
-        </div>
+        </nav>
 
         {/* Login Button */}
-        <Login />
+        <div className="flex items-center">
+          <Login />
+        </div>
       </div>
     </header>
   );
