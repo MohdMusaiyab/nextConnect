@@ -2,6 +2,7 @@
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
+import { signIn } from "next-auth/react";
 
 export default function Signup() {
   const [name, setName] = useState<string>("");
@@ -25,9 +26,10 @@ export default function Signup() {
         router.push("/");
       }
     } catch (err) {
-      // Handle the error and extract the error message safely
       if (err instanceof AxiosError) {
-        setError(err.response?.data?.message || "An error occurred. Please try again.");
+        setError(
+          err.response?.data?.message || "An error occurred. Please try again."
+        );
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
@@ -35,47 +37,56 @@ export default function Signup() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <h1 className="text-2xl font-bold">Sign Up</h1>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {error && <p className="text-red-600">{error}</p>}
-        <div>
-          <label className="block text-sm font-medium">Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-2 mt-1 border rounded-md text-black"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 mt-1 border rounded-md text-black"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 mt-1 border rounded-md text-black"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full py-2 mt-4 font-semibold text-white bg-blue-500 rounded-md"
-        >
-          Sign Up
-        </button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen p-6">
+      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-lg transform transition-all hover:scale-105">
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Create Your Account</h1>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {error && <p className="text-red-600 text-center">{error}</p>}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700">Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-3 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-3 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-3 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-3 mt-4 text-lg font-semibold text-white bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 hover:to-purple-500 transition-all duration-300"
+          >
+            Sign Up
+          </button>
+          <p className="text-sm text-center text-gray-600">Already have an account?</p>
+          <button
+            onClick={() => router.push("/auth/signin")}
+            className="w-full py-3 mt-4 text-lg font-semibold text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-lg shadow-md hover:from-blue-500 hover:to-green-400 transition-all duration-300"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
